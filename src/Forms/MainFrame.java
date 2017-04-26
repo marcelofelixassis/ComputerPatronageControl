@@ -6,6 +6,7 @@
 package Forms;
 
 import Animacion.Animacion;
+import Classes_Home.Editar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Window;
@@ -1390,28 +1391,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-	    try{
-		String query = "update cpu set patrimonio = ?, ip = ?, setor = ?, usuario = ?,"
-		    + " marca = ?, so = ?, supcpu = ?, estab = ?, impressora = ? where id = ?";
-		PreparedStatement preparedStmt = connection.prepareStatement(query);
-		preparedStmt.setString(1, jText_patrimonio.getText());
-		preparedStmt.setString(2, jText_ip.getText());
-		preparedStmt.setString(3, jText_setor.getText());
-		preparedStmt.setString(4, jText_usuario.getText());
-		preparedStmt.setString(5, jText_marca.getText());
-		preparedStmt.setString(6, jText_sisope.getText());
-		preparedStmt.setString(7, jText_supcpu.getText());
-		preparedStmt.setString(8, jText_estab.getText());
-		preparedStmt.setString(9, jText_impressora.getText());
-		preparedStmt.setInt(10, idSelecionado);
-
-		preparedStmt.executeUpdate();	
-		
-		PreencherTabelaComputador();
-	    }catch(Exception e){
-		e.printStackTrace();
-	    }
+	    Editar editar = new Editar();
+	    editar.Edit(jText_patrimonio.getText(), jText_ip.getText(), jText_setor.getText(), 
+		    jText_usuario.getText(), jText_marca.getText(), jText_sisope.getText(), 
+		    jText_supcpu.getText(), jText_estab.getText(), jText_impressora.getText(), 
+		    idSelecionado, patrimonioBtnEditar, supcpuBtnEditar, estabBtnEditar, impressoraBtnEditar);
 	    
+	    PreencherTabelaComputador();
+
 	    if(!patrimonioBtnEditar.equals(jText_patrimonio.getText())){
 		    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-lo"}; //0 1 2
 		    int selection = JOptionPane.showOptionDialog(
