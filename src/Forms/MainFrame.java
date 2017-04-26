@@ -36,7 +36,7 @@ import scpmso.patrimonio.informática.SupNI;
 
 /**
  *
- * @author admin
+ * @author Marcelo Félix
  */
 public class MainFrame extends javax.swing.JFrame {
     
@@ -1348,6 +1348,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         PesquisarPeloSetor("'REX'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1360,18 +1363,30 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         PesquisarPeloSetor("'DCSS'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         PesquisarPeloSetor("'BIO'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         PesquisarPeloSetor("'NI'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         PesquisarPeloSetor("'PRO'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1428,38 +1443,59 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
+	PesquisarPeloSetor("'APL'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
+        PesquisarPeloSetor("'DIG'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
+        PesquisarPeloSetor("'ATR'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
+        PesquisarPeloSetor("'ACM'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
+        PesquisarPeloSetor("'CM'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
+        PesquisarPeloSetor("'ARQ'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        // TODO add your handling code here:
+        PesquisarPeloSetor("'SCPMSO'");
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void aquiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aquiMouseReleased
 	int position = aqui.getY();
 	if(position > 0){
 	    Animacion.subir(0,-100,1,jPanel2);
-	    Animacion.subir(85,0,1,aqui);
+	    Animacion.subir(100,0,1,aqui);
 	    Animacion.subir(95,0,1,jScrollPane2);
 	}else{
 	    Animacion.bajar(-110,0,1,jPanel2);
@@ -1522,6 +1558,9 @@ public class MainFrame extends javax.swing.JFrame {
 	    tipo = "impressora";
 	}
 	PesquisaAvancada(pesquisa, tipo);
+	Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,aqui);
+	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
