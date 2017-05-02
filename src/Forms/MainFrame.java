@@ -7,6 +7,8 @@ package Forms;
 
 import Animacion.Animacion;
 import Classes_Home.Editar;
+import Classes_Home.Excluir;
+import Classes_Home.PesquisasAvancada;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Window;
@@ -387,57 +389,14 @@ public class MainFrame extends javax.swing.JFrame {
        }
     }
       
-      public void PesquisaAvancada(String text, String tipo){
-	   ArrayList<Computador> usersList = new ArrayList<Computador>();
-       model = (DefaultTableModel)jTableComputador.getModel();
-       String query = "SELECT * FROM  `cpu` WHERE "+ tipo +" = "+text;
       
-       
-       usersList.clear();
-       if (model.getRowCount() > 0) {  
-           int x = -1;  
-           int j = model.getRowCount();  
-           do {  
-               model.removeRow(0);  
-               --j;  
-           } while (j > 0);  
-       }  
-       
-       try {
-           st = connection.createStatement();
-           rs = st.executeQuery(query);
-           Computador computador;
-           while(rs.next())
-           {
-               computador = new Computador(rs.getInt("id"),rs.getInt("patrimonio"),rs.getString("ip"),
-		       rs.getString("setor"), rs.getString("usuario"), rs.getString("marca"), rs.getString("so"),
-		       rs.getString("supcpu"), rs.getString("estab"), rs.getString("impressora"));
-	       
-               usersList.add(computador);
-           }
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-       model.fireTableRowsDeleted(1, 100);
-       ArrayList<Computador> list = usersList;
-       Object[] row = new Object[10];
-       for(int i = 0; i < list.size(); i++)
-       {
-	   row[0] = list.get(i).getId();
-           row[1] = list.get(i).getPatrimonio();
-           row[2] = list.get(i).getIp();
-           row[3] = list.get(i).getSetor();
-	   row[4] = list.get(i).getUsuario();
-           row[5] = list.get(i).getMarca();
-           row[6] = list.get(i).getSo();
-           row[7] = list.get(i).getSupcpu();
-	   row[8] = list.get(i).getEstab();
-	   row[9] = list.get(i).getImpressora();
-
-	   
-           model.addRow(row);
-       }
-   }
+      
+      
+      
+      
+      
+      
+     
    
       
        
@@ -513,6 +472,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
         jPanelTabela = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -588,6 +548,26 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jInternalFrame3 = new javax.swing.JInternalFrame();
+        jText_cpu_ni1 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jText_marca_ni1 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jText_sisope_ni1 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jInternalFrame4 = new javax.swing.JInternalFrame();
+        jLabel23 = new javax.swing.JLabel();
+        jText_cpu_ni2 = new javax.swing.JTextField();
+        jButton23 = new javax.swing.JButton();
+        jInternalFrame5 = new javax.swing.JInternalFrame();
+        jLabel24 = new javax.swing.JLabel();
+        jText_cpu_ni3 = new javax.swing.JTextField();
+        jButton24 = new javax.swing.JButton();
+        jInternalFrame6 = new javax.swing.JInternalFrame();
+        jLabel25 = new javax.swing.JLabel();
+        jText_cpu_ni4 = new javax.swing.JTextField();
+        jButton25 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 51));
@@ -617,11 +597,10 @@ public class MainFrame extends javax.swing.JFrame {
         jButton7.setBackground(new java.awt.Color(0, 0, 0));
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x48-compra.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
+
+        jButton22.setBackground(new java.awt.Color(0, 0, 0));
+        jButton22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x48-folder.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -634,7 +613,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1052, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -643,7 +624,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1122,7 +1104,7 @@ public class MainFrame extends javax.swing.JFrame {
             jTablecpuni.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jPanelNI.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 577, 440));
+        jPanelNI.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 577, 290));
 
         jTablesupni.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1153,7 +1135,7 @@ public class MainFrame extends javax.swing.JFrame {
             jTablesupni.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanelNI.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 11, 215, 291));
+        jPanelNI.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 215, 291));
 
         jTableestabni.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1184,7 +1166,7 @@ public class MainFrame extends javax.swing.JFrame {
             jTableestabni.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanelNI.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(838, 11, 215, 291));
+        jPanelNI.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, 215, 291));
 
         jTableimpressorani.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1215,19 +1197,20 @@ public class MainFrame extends javax.swing.JFrame {
             jTableimpressorani.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jPanelNI.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1071, 11, 215, 291));
+        jPanelNI.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 10, 215, 291));
 
+        jInternalFrame2.setTitle("NOVO USUÁRIO");
         jInternalFrame2.setVisible(true);
         jInternalFrame2.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jInternalFrame2.getContentPane().add(jText_cpu_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_ip_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_setor_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_usuario_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_marca_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_sisope_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_supcpu_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_estab_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 140, -1));
-        jInternalFrame2.getContentPane().add(jText_impressora_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_cpu_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_ip_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_setor_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_usuario_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_marca_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_sisope_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_supcpu_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_estab_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 140, -1));
+        jInternalFrame2.getContentPane().add(jText_impressora_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 140, -1));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contract.png"))); // NOI18N
@@ -1237,45 +1220,127 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jInternalFrame2.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 140, 40));
+        jInternalFrame2.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 140, 40));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("IMPRESSORA:");
-        jInternalFrame2.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("CPU:");
-        jInternalFrame2.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 30));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("IP:");
-        jInternalFrame2.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setText("SETOR:");
-        jInternalFrame2.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 30));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel15.setText("USUÁRIO:");
-        jInternalFrame2.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("MARCA:");
-        jInternalFrame2.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, 30));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setText("SIS.OPE:");
-        jInternalFrame2.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 30));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("SUP.CPU:");
-        jInternalFrame2.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 30));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel19.setText("ESTAB:");
-        jInternalFrame2.getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, 30));
+        jInternalFrame2.getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, 30));
 
-        jPanelNI.add(jInternalFrame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 264, 420));
+        jPanelNI.add(jInternalFrame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 264, 570));
+
+        jInternalFrame3.setTitle("ENTRADA DE CPU");
+        jInternalFrame3.setVisible(true);
+        jInternalFrame3.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jInternalFrame3.getContentPane().add(jText_cpu_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel20.setText("CPU:");
+        jInternalFrame3.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setText("MARCA:");
+        jInternalFrame3.getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 30));
+        jInternalFrame3.getContentPane().add(jText_marca_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel22.setText("SIS.OPE:");
+        jInternalFrame3.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
+        jInternalFrame3.getContentPane().add(jText_sisope_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 140, -1));
+
+        jButton6.setBackground(new java.awt.Color(0, 0, 0));
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 204, 51));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-add.png"))); // NOI18N
+        jButton6.setText("ADICIONAR");
+        jInternalFrame3.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jPanelNI.add(jInternalFrame3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 280, 180));
+
+        jInternalFrame4.setTitle("ENTRADA DE SUPORTE");
+        jInternalFrame4.setVisible(true);
+        jInternalFrame4.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel23.setText("SUPCPU:");
+        jInternalFrame4.getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+        jInternalFrame4.getContentPane().add(jText_cpu_ni2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
+
+        jButton23.setBackground(new java.awt.Color(0, 0, 0));
+        jButton23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton23.setForeground(new java.awt.Color(0, 204, 51));
+        jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-add.png"))); // NOI18N
+        jButton23.setText("ADICIONAR");
+        jInternalFrame4.getContentPane().add(jButton23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        jPanelNI.add(jInternalFrame4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 280, 120));
+
+        jInternalFrame5.setTitle("ENTRADA DE ESTABILIZADOR");
+        jInternalFrame5.setVisible(true);
+        jInternalFrame5.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel24.setText("ESTAB:");
+        jInternalFrame5.getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+        jInternalFrame5.getContentPane().add(jText_cpu_ni3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
+
+        jButton24.setBackground(new java.awt.Color(0, 0, 0));
+        jButton24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton24.setForeground(new java.awt.Color(0, 204, 51));
+        jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-add.png"))); // NOI18N
+        jButton24.setText("ADICIONAR");
+        jInternalFrame5.getContentPane().add(jButton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        jPanelNI.add(jInternalFrame5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 280, 120));
+
+        jInternalFrame6.setTitle("ENTRADA DE IMPRESSORA");
+        jInternalFrame6.setVisible(true);
+        jInternalFrame6.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel25.setText("IMPRESSORA:");
+        jInternalFrame6.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 30));
+        jInternalFrame6.getContentPane().add(jText_cpu_ni4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
+
+        jButton25.setBackground(new java.awt.Color(0, 0, 0));
+        jButton25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton25.setForeground(new java.awt.Color(0, 204, 51));
+        jButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-add.png"))); // NOI18N
+        jButton25.setText("ADICIONAR");
+        jInternalFrame6.getContentPane().add(jButton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        jPanelNI.add(jInternalFrame6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 760, 280, -1));
 
         parentPanel.add(jPanelNI, "card3");
 
@@ -1284,22 +1349,15 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
  /**
 * 
 * EVENTOS ----------------------------------------------------------------------- 
 * 
-*/   
+*/    
+    /**
+     * 
+     * @IR PARA SALA NI
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 	parentPanel.removeAll();
 	parentPanel.add(jPanelNI);
@@ -1310,7 +1368,10 @@ public class MainFrame extends javax.swing.JFrame {
 	PreencherTabelaEstabNI();
 	PreencherTabelaImpressoraNI();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+     /**
+     * 
+     * @DUPLO CLICK NA TABELA HOME
+     */
     private void jTableComputadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableComputadorMouseClicked
 	if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
@@ -1342,11 +1403,10 @@ public class MainFrame extends javax.swing.JFrame {
 	    jText_impressora.setText(impressora);
         }
     }//GEN-LAST:event_jTableComputadorMouseClicked
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-
-    }//GEN-LAST:event_jButton7ActionPerformed
-
+    /**
+     * 
+     * @PESQUISAS MENU DE SETORES
+     */
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         PesquisarPeloSetor("'REX'");
 	Animacion.subir(0,-100,1,jPanel2);
@@ -1358,8 +1418,7 @@ public class MainFrame extends javax.swing.JFrame {
         PesquisarPeloSetor("'AIN'");
 	Animacion.subir(0,-100,1,jPanel2);
 	Animacion.subir(85,0,1,aqui);
-	Animacion.subir(95,0,1,jScrollPane2);
-	     
+	Animacion.subir(95,0,1,jScrollPane2);    
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -1389,46 +1448,52 @@ public class MainFrame extends javax.swing.JFrame {
 	Animacion.subir(85,0,1,aqui);
 	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton13ActionPerformed
-
+    /**
+     * 
+     * @EDITANDO (UPDATE) NA TABELA HOME
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-	    Editar editar = new Editar();
-	    editar.Edit(jText_patrimonio.getText(), jText_ip.getText(), jText_setor.getText(), 
-		    jText_usuario.getText(), jText_marca.getText(), jText_sisope.getText(), 
-		    jText_supcpu.getText(), jText_estab.getText(), jText_impressora.getText(), 
-		    idSelecionado, patrimonioBtnEditar, supcpuBtnEditar, estabBtnEditar, impressoraBtnEditar);
-	    
-	    PreencherTabelaComputador();
+	Editar editar = new Editar();
+	editar.Edit(jText_patrimonio.getText(), jText_ip.getText(), jText_setor.getText(), 
+	    jText_usuario.getText(), jText_marca.getText(), jText_sisope.getText(), 
+	    jText_supcpu.getText(), jText_estab.getText(), jText_impressora.getText(), 
+	    idSelecionado, patrimonioBtnEditar, supcpuBtnEditar, estabBtnEditar, impressoraBtnEditar);  
+	
+	PreencherTabelaComputador();
 
-	    if(!patrimonioBtnEditar.equals(jText_patrimonio.getText())){
-		    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-lo"}; //0 1 2
-		    int selection = JOptionPane.showOptionDialog(
-		    null, "O que deseja fazer com o CPU "+patrimonioBtnEditar+" ?", "",
-		    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-		    patrimonioBtnEditar = jText_patrimonio.getText();
-	    }
-	     if(!supcpuBtnEditar.equals(jText_supcpu.getText())){
-		    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-lo"}; //0 1 2
-		    int selection = JOptionPane.showOptionDialog(
-		    null, "O que deseja fazer com o SUPORTE CPU "+supcpuBtnEditar+" ?", "",
-		    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-		    supcpuBtnEditar = jText_supcpu.getText();
-	    }
-	      if(!estabBtnEditar.equals(jText_estab.getText())){
-		    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-lo"}; //0 1 2
-		    int selection = JOptionPane.showOptionDialog(
-		    null, "O que deseja fazer com o ESTABILIZADOR "+estabBtnEditar+" ?", "",
-		    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-		    estabBtnEditar = jText_estab.getText();
-	    }
-	       if(!impressoraBtnEditar.equals(jText_impressora.getText())){
-		    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-la"}; //0 1 2
-		    int selection = JOptionPane.showOptionDialog(
-		    null, "O que deseja fazer com a IMPRESSORA "+impressoraBtnEditar+" ?", "",
-		    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-		    impressoraBtnEditar = jText_impressora.getText();
-	    }
+	if(!patrimonioBtnEditar.equals(jText_patrimonio.getText())){
+	    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-lo"}; //0 1 2
+	    int selection = JOptionPane.showOptionDialog(
+	    null, "O que deseja fazer com o CPU "+patrimonioBtnEditar+" ?", "",
+	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	    patrimonioBtnEditar = jText_patrimonio.getText();
+        }
+	if(!supcpuBtnEditar.equals(jText_supcpu.getText())){
+	    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-lo"}; //0 1 2
+	    int selection = JOptionPane.showOptionDialog(
+	    null, "O que deseja fazer com o SUPORTE CPU "+supcpuBtnEditar+" ?", "",
+	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	    supcpuBtnEditar = jText_supcpu.getText();
+	}
+	if(!estabBtnEditar.equals(jText_estab.getText())){
+	    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-lo"}; //0 1 2
+	    int selection = JOptionPane.showOptionDialog(
+	    null, "O que deseja fazer com o ESTABILIZADOR "+estabBtnEditar+" ?", "",
+	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	    estabBtnEditar = jText_estab.getText();
+        }
+	if(!impressoraBtnEditar.equals(jText_impressora.getText())){
+	    Object opcoes[] = {"Mover para NI - 316", "Mover para 304", "Exclui-la"}; //0 1 2
+	    int selection = JOptionPane.showOptionDialog(
+	    null, "O que deseja fazer com a IMPRESSORA "+impressoraBtnEditar+" ?", "",
+	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	    impressoraBtnEditar = jText_impressora.getText();
+	}
     }//GEN-LAST:event_jButton3ActionPerformed
-
+     /**
+     * 
+     * @PESQUISAS MENU DE SETORES
+     */
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
 	PesquisarPeloSetor("'APL'");
 	Animacion.subir(0,-100,1,jPanel2);
@@ -1477,7 +1542,10 @@ public class MainFrame extends javax.swing.JFrame {
 	Animacion.subir(85,0,1,aqui);
 	Animacion.subir(95,0,1,jScrollPane2);
     }//GEN-LAST:event_jButton21ActionPerformed
-
+     /**
+     * 
+     * @UP / DOWN DO MENU DE SETORES/PESQUISA
+     */
     private void aquiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aquiMouseReleased
 	int position = aqui.getY();
 	if(position > 0){
@@ -1490,7 +1558,10 @@ public class MainFrame extends javax.swing.JFrame {
 	    Animacion.bajar(0,95,1,jScrollPane2);
 	}
     }//GEN-LAST:event_aquiMouseReleased
-
+     /**
+     * 
+     * @IR PARA HOME
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         parentPanel.removeAll();
         parentPanel.add(jPanelTabela);
@@ -1498,53 +1569,19 @@ public class MainFrame extends javax.swing.JFrame {
         parentPanel.revalidate();
         PreencherTabelaComputador();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+     /**
+     * 
+     * @EXCLUIR NA TABELA HOME
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Object opcoes[] = {"Sim", "Não"}; //0 1
-	int selection = JOptionPane.showOptionDialog(
-	    null, "Deseja excluir todos os dados referentes ao CPU "+jText_patrimonio.getText()+" ?", "",
-	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]
-	);
-	switch(selection){
-	    case 0:
-		String ps = "-";
-		try{
-		String query = "update cpu set patrimonio = ?, ip = ?, setor = ?, usuario = ?,"
-		    + " marca = ?, so = ?, supcpu = ?, estab = ?, impressora = ? where id = ?";
-		PreparedStatement preparedStmt = connection.prepareStatement(query);
-		preparedStmt.setInt(1, 0);
-		preparedStmt.setString(2, jText_ip.getText());
-		preparedStmt.setString(3, ps);
-		preparedStmt.setString(4, ps);
-		preparedStmt.setString(5, ps);
-		preparedStmt.setString(6, ps);
-		preparedStmt.setString(7, ps);
-		preparedStmt.setString(8, ps);
-		preparedStmt.setString(9, ps);
-		preparedStmt.setInt(10, idSelecionado);
-
-		preparedStmt.executeUpdate();	
-		
-		PreencherTabelaComputador();
-	    }catch(Exception e){
-		e.printStackTrace();
-	    }
-	    break;    
-	}
+        Excluir excluir = new Excluir();
+	excluir.exclui(jText_patrimonio.getText(), jText_ip.getText(), idSelecionado);
+	PreencherTabelaComputador();
     }//GEN-LAST:event_jButton4ActionPerformed
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        String pesquisa = jTextField_pesquisa.getText();
-	String tipo = jComboBox_pesquisa.getSelectedItem().toString();
-	if(tipo.equals("CPU")){
-	    tipo = "patrimonio";
-	}else if(tipo.equals("Suporte")){
-	    tipo = "supcpu";
-	}else if(tipo.equals("Estabilizador")){
-	    tipo = "estab";
-	}else if(tipo.equals("Impressora")){
-	    tipo = "impressora";
-	}
-	PesquisaAvancada(pesquisa, tipo);
+	PesquisasAvancada ps = new PesquisasAvancada();
+	ps.asdf(jTableComputador, jComboBox_pesquisa.getSelectedItem().toString(), jTextField_pesquisa.getText());
+	
 	Animacion.subir(0,-100,1,jPanel2);
 	Animacion.subir(85,0,1,aqui);
 	Animacion.subir(95,0,1,jScrollPane2);
@@ -1553,7 +1590,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
-
+     /**
+     * 
+     * @DUPLO CLICK TABELAS SALA NI
+     */
     private void jTablecpuniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablecpuniMouseClicked
 	if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
@@ -1597,21 +1637,7 @@ public class MainFrame extends javax.swing.JFrame {
 * FIM EVENTOS ----------------------------------------------------------------------
 * 
 */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public static void main(String args[]) {
 	//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 	/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1659,15 +1685,24 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox_pesquisa;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
+    private javax.swing.JInternalFrame jInternalFrame3;
+    private javax.swing.JInternalFrame jInternalFrame4;
+    private javax.swing.JInternalFrame jInternalFrame5;
+    private javax.swing.JInternalFrame jInternalFrame6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1680,6 +1715,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1705,6 +1746,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTablesupni;
     private javax.swing.JTextField jTextField_pesquisa;
     private javax.swing.JTextField jText_cpu_ni;
+    private javax.swing.JTextField jText_cpu_ni1;
+    private javax.swing.JTextField jText_cpu_ni2;
+    private javax.swing.JTextField jText_cpu_ni3;
+    private javax.swing.JTextField jText_cpu_ni4;
     private javax.swing.JTextField jText_estab;
     private javax.swing.JTextField jText_estab_ni;
     private javax.swing.JTextField jText_impressora;
@@ -1713,11 +1758,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jText_ip_ni;
     private javax.swing.JTextField jText_marca;
     private javax.swing.JTextField jText_marca_ni;
+    private javax.swing.JTextField jText_marca_ni1;
     private javax.swing.JTextField jText_patrimonio;
     private javax.swing.JTextField jText_setor;
     private javax.swing.JTextField jText_setor_ni;
     private javax.swing.JTextField jText_sisope;
     private javax.swing.JTextField jText_sisope_ni;
+    private javax.swing.JTextField jText_sisope_ni1;
     private javax.swing.JTextField jText_supcpu;
     private javax.swing.JTextField jText_supcpu_ni;
     private javax.swing.JTextField jText_usuario;

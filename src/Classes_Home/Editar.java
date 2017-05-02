@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import scpmso.patrimonio.informática.ConnectionMySQL;
-
 /**
  *
  * @author Marcelo Félix - marcelofelix.af@gmail.com
@@ -22,7 +21,6 @@ public class Editar {
    Connection connection = mysql.Conectar();
    Statement st;
    ResultSet rs;
-   
    
     public void Edit(String patrimonio, String ip, String setor, String usuario, 
 	    String marca, String sisop, String supcpu, String estab, String impressora, 
@@ -44,5 +42,4 @@ public class Editar {
 	    e.printStackTrace();
 	}
     }
-   
 }
