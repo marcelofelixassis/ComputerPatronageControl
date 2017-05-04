@@ -22,38 +22,28 @@ import scpmso.patrimonio.informática.ConnectionMySQL;
  *
  * @author Marcelo Félix - marcelofelix.af@gmail.com
  */
-public class PesquisasAvancada {
-    public DefaultTableModel model = new DefaultTableModel();
-    ConnectionMySQL mysql = new ConnectionMySQL();
-    Connection connection = mysql.Conectar();
-    Statement st;
-    ResultSet rs;
+public class PesquisarSetor {
+   public DefaultTableModel model = new DefaultTableModel();
+   ConnectionMySQL mysql = new ConnectionMySQL();
+   Connection connection = mysql.Conectar();
+   Statement st;
+   ResultSet rs;
     
-    public void asdf (JTable ob, String tipo, String text, JPanel jPanel2, JScrollPane jScrollPane2, JLabel SetaMenuDeSetores){
+    public void pesquisarsetor(JTable jTableComputador, String text, JPanel jPanel2, JScrollPane jScrollPane2, JLabel SetaMenuDeSetores){
+	ArrayList<Computador> usersList = new ArrayList<Computador>();
+	model = (DefaultTableModel)jTableComputador.getModel();
+        String query = "SELECT * FROM  `cpu` WHERE setor = "+text;
+      
+        usersList.clear();
 	
-	if(tipo.equals("CPU")){
-	    tipo = "patrimonio";
-	}else if(tipo.equals("Suporte")){
-	    tipo = "supcpu";
-	}else if(tipo.equals("Estabilizador")){
-	    tipo = "estab";
-	}else if(tipo.equals("Impressora")){
-	    tipo = "impressora";
-	}
-	
-       ArrayList<Computador> usersList = new ArrayList<Computador>();
-       model = (DefaultTableModel)ob.getModel();
-       String query = "SELECT * FROM  `cpu` WHERE "+ tipo +" = "+text;
-       
-       usersList.clear();
-       if (model.getRowCount() > 0) {  
+        if (model.getRowCount() > 0) {  
            int x = -1;  
            int j = model.getRowCount();  
            do {  
                model.removeRow(0);  
                --j;  
            } while (j > 0);  
-       }  
+        }  
        
        try {
            st = connection.createStatement();
@@ -62,8 +52,8 @@ public class PesquisasAvancada {
            while(rs.next())
            {
                computador = new Computador(rs.getInt("id"),rs.getInt("patrimonio"),rs.getString("ip"),
-		       rs.getString("setor"), rs.getString("usuario"), rs.getString("marca"), rs.getString("so"),
-		       rs.getString("supcpu"), rs.getString("estab"), rs.getString("impressora"));
+		    rs.getString("setor"), rs.getString("usuario"), rs.getString("marca"), rs.getString("so"),
+		    rs.getString("supcpu"), rs.getString("estab"), rs.getString("impressora"));
 	       
                usersList.add(computador);
            }
@@ -86,12 +76,10 @@ public class PesquisasAvancada {
 	   row[8] = list.get(i).getEstab();
 	   row[9] = list.get(i).getImpressora();
 
-	   
            model.addRow(row);
        }
-       Animacion.subir(0,-100,1,jPanel2);
-       Animacion.subir(85,0,1,SetaMenuDeSetores);
-       Animacion.subir(95,0,1,jScrollPane2);
-    }
-    
+        Animacion.subir(0,-100,1,jPanel2);
+	Animacion.subir(85,0,1,SetaMenuDeSetores);
+	Animacion.subir(95,0,1,jScrollPane2);  
+    }  
 }

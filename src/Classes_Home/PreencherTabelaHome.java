@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classes_Home;
 
-import Animacion.Animacion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import scpmso.patrimonio.informática.Computador;
@@ -22,28 +13,17 @@ import scpmso.patrimonio.informática.ConnectionMySQL;
  *
  * @author Marcelo Félix - marcelofelix.af@gmail.com
  */
-public class PesquisasAvancada {
-    public DefaultTableModel model = new DefaultTableModel();
-    ConnectionMySQL mysql = new ConnectionMySQL();
-    Connection connection = mysql.Conectar();
-    Statement st;
-    ResultSet rs;
-    
-    public void asdf (JTable ob, String tipo, String text, JPanel jPanel2, JScrollPane jScrollPane2, JLabel SetaMenuDeSetores){
-	
-	if(tipo.equals("CPU")){
-	    tipo = "patrimonio";
-	}else if(tipo.equals("Suporte")){
-	    tipo = "supcpu";
-	}else if(tipo.equals("Estabilizador")){
-	    tipo = "estab";
-	}else if(tipo.equals("Impressora")){
-	    tipo = "impressora";
-	}
-	
+public class PreencherTabelaHome {
+   public DefaultTableModel model = new DefaultTableModel();
+   ConnectionMySQL mysql = new ConnectionMySQL();
+   Connection connection = mysql.Conectar();
+   Statement st;
+   ResultSet rs;
+
+     public void preenchertabelahome(JTable jTableComputador){  
        ArrayList<Computador> usersList = new ArrayList<Computador>();
-       model = (DefaultTableModel)ob.getModel();
-       String query = "SELECT * FROM  `cpu` WHERE "+ tipo +" = "+text;
+       model = (DefaultTableModel)jTableComputador.getModel();
+       String query = "SELECT * FROM  `cpu` ORDER BY 'ip' ";
        
        usersList.clear();
        if (model.getRowCount() > 0) {  
@@ -85,13 +65,9 @@ public class PesquisasAvancada {
            row[7] = list.get(i).getSupcpu();
 	   row[8] = list.get(i).getEstab();
 	   row[9] = list.get(i).getImpressora();
-
 	   
            model.addRow(row);
        }
-       Animacion.subir(0,-100,1,jPanel2);
-       Animacion.subir(85,0,1,SetaMenuDeSetores);
-       Animacion.subir(95,0,1,jScrollPane2);
-    }
+   }
     
 }
