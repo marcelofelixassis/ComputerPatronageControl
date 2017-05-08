@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import scpmso.patrimonio.informática.ConnectionMySQL;
-import scpmso.patrimonio.informática.ImpressoraNI;
 import scpmso.patrimonio.informática.SupNI;
 
 /**

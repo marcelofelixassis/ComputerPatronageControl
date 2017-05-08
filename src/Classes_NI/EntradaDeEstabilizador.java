@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Classes_NI;
 
 import java.sql.Connection;
@@ -10,37 +15,35 @@ import scpmso.patrimonio.informática.ConnectionMySQL;
 
 /**
  *
- * @author Marcelo Félix - marcelofelix.af@gmail.com
+ * @author admin
  */
-public class EntradaDeCpu {
-   PreencherTabelaComputadorNI preencherTabelaComputadorNI = new PreencherTabelaComputadorNI();
+public class EntradaDeEstabilizador {
+   PreencherTabelaEstabNI preencherTabelaEstabNI = new PreencherTabelaEstabNI();
    Statement st, st2 ;
    ResultSet rs, rs2;
    String query;
    
-   public void entradacpu(int cpu, String marca, String sisope, JTable jTablecpuni){
+   public void entradaestabilizador(int estab, JTable jTableestabni){
         ConnectionMySQL mysql = new ConnectionMySQL();
         Connection connection = mysql.Conectar();
        try {
-	    query = "SELECT * from cpuni WHERE patrimonio = '" + cpu +"'";
+	    query = "SELECT * from estabni WHERE patrimonio = '" + estab +"'";
 	    st = connection.createStatement();
 	    rs = st.executeQuery(query);
 	    if(rs.next()){
-		JOptionPane.showMessageDialog(null, "O cpu de patrimonio "+cpu+" já está cadastrado");
+		JOptionPane.showMessageDialog(null, "O estabilizador de patrimonio "+estab+" já está cadastrado");
 	    }else{
-		query = "SELECT * from cpu WHERE patrimonio = '" + cpu +"'";
+		query = "SELECT * from cpu WHERE estab = '" + estab +"'";
 		st2 = connection.createStatement();
 		rs2 = st.executeQuery(query);
 		if(rs2.next()){
-		    JOptionPane.showMessageDialog(null, "O cpu de patrimonio "+cpu+" já está cadastrado");
+		    JOptionPane.showMessageDialog(null, "O estabilizador de patrimonio "+estab+" já está cadastrado");
 		}else{
 		    try{
-		    query = "INSERT INTO cpuni (patrimonio, marca, sisope) VALUES (?, ?, ?)";
+		    query = "INSERT INTO estabni (patrimonio) VALUES (?)";
 		    PreparedStatement preparedStmt = connection.prepareStatement(query);
-		    preparedStmt.setInt(1, cpu);
-		    preparedStmt.setString(2, marca);
-		    preparedStmt.setString(3, sisope);
-	 
+		    preparedStmt.setInt(1, estab);
+	
 		    preparedStmt.executeUpdate();
 
 		    connection.close();
@@ -48,7 +51,7 @@ public class EntradaDeCpu {
 		catch (Exception e){
 		    e.printStackTrace();
 		}
-		preencherTabelaComputadorNI.PreencherTabelaComputadorNI(jTablecpuni);
+		preencherTabelaEstabNI.PreencherTabelaEstab(jTableestabni);
 		st.close();
 		st2.close();
 		rs.close();
@@ -59,4 +62,5 @@ public class EntradaDeCpu {
 	    e.printStackTrace();
         }
     }  
+    
 }
