@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classes_NI;
 
 import java.sql.Connection;
@@ -15,7 +10,7 @@ import scpmso.patrimonio.informática.ConnectionMySQL;
 
 /**
  *
- * @author admin
+ * @author Marcelo Félix - marcelofelix.af@gmail.com
  */
 public class EntradaDeEstabilizador {
    PreencherTabelaEstabNI preencherTabelaEstabNI = new PreencherTabelaEstabNI();

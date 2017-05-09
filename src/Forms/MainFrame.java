@@ -12,6 +12,7 @@ import Classes_NI.EntradaDeCpu;
 import Classes_NI.EntradaDeEstabilizador;
 import Classes_NI.EntradaDeImpressora;
 import Classes_NI.EntradaDeSuporte;
+import Classes_NI.EnviarParaRegional;
 import Classes_NI.ExcluirNi;
 import Classes_NI.PreencherTabelaComputadorNI;
 import Classes_NI.PreencherTabelaEstabNI;
@@ -19,8 +20,10 @@ import Classes_NI.PreencherTabelaImpressoraNI;
 import Classes_NI.PreencherTabelaSupNI;
 import java.awt.Color;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -59,7 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
    
     public MainFrame() {
 	initComponents();
-	jText_ip.setEnabled(false);
+	jText_ip.setEnabled(false);jComboBox_pesquisa1.setEnabled(false); jTextArea1.setEnabled(false); jButton29.setEnabled(false);
 	jTableComputador.setDefaultEditor(Object.class, null);
 	this.setExtendedState(MAXIMIZED_BOTH);
         getContentPane().setBackground(Color.WHITE);
@@ -213,6 +216,8 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel43 = new javax.swing.JLabel();
+        jButton29 = new javax.swing.JButton();
+        jButton32 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 51));
@@ -1129,7 +1134,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jLabel30MouseClicked(evt);
             }
         });
-        jInternalFrame7.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        jInternalFrame7.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-compra.png"))); // NOI18N
         jLabel31.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1146,7 +1151,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jLabel32MouseClicked(evt);
             }
         });
-        jInternalFrame7.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
+        jInternalFrame7.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-basura.png"))); // NOI18N
         jLabel34.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1155,7 +1160,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jLabel34MouseClicked(evt);
             }
         });
-        jInternalFrame7.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
+        jInternalFrame7.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-compra.png"))); // NOI18N
         jLabel35.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1172,13 +1177,13 @@ public class MainFrame extends javax.swing.JFrame {
                 jLabel36MouseClicked(evt);
             }
         });
-        jInternalFrame7.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
-        jInternalFrame7.getContentPane().add(jText_impressora_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 240, -1));
+        jInternalFrame7.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
+        jInternalFrame7.getContentPane().add(jText_impressora_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 250, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("IMPRESSORA:");
         jInternalFrame7.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, 30));
-        jInternalFrame7.getContentPane().add(jText_estab_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 240, -1));
+        jInternalFrame7.getContentPane().add(jText_estab_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 250, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel19.setText("ESTAB:");
@@ -1187,23 +1192,32 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setText("SUP.CPU:");
         jInternalFrame7.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 60, 30));
-        jInternalFrame7.getContentPane().add(jText_supcpu_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 240, -1));
-        jInternalFrame7.getContentPane().add(jText_cpu_ni5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 240, -1));
+        jInternalFrame7.getContentPane().add(jText_supcpu_ni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 250, -1));
+        jInternalFrame7.getContentPane().add(jText_cpu_ni5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 250, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("CPU:");
         jInternalFrame7.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, 30));
 
         jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-folder.png"))); // NOI18N
+        jLabel39.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel39.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel39MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-folder.png"))); // NOI18N
+        jLabel40.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jInternalFrame7.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-folder.png"))); // NOI18N
+        jLabel41.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jInternalFrame7.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-folder.png"))); // NOI18N
+        jLabel42.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jInternalFrame7.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jComboBox_pesquisa1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UMA REGIONAL", "ALMENARA", "ARAÇUAÍ", "BARBACENA", "CARATINGA", "CORONEL FABRICIANO", "CURVELO", "DIAMANTINA", "DIVINÓPOLIS", "GOVERNADOR VALADARES", "ITABIRA", "JANAÚBA", "JUIZ DE FORA", "LAVRAS", "LEOPOLDINA", "MONTES CLAROS", "MURIAÉ", "PARACATU", "PASSOS", "PATOS DE MINAS", "POÇOS DE CALDAS", "POUSO ALEGRE", "SAO JOAO DEL REI", "SETE LAGOAS", "TEÓFILO OTONI", "UBÁ", "UBERABA", "UBERLÂNDIA", "VARGINHA", "VIÇOSA" }));
@@ -1213,12 +1227,18 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane6.setViewportView(jTextArea1);
 
-        jInternalFrame7.getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 370, 120));
+        jInternalFrame7.getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 370, 80));
 
         jLabel43.setText("Observações:");
-        jInternalFrame7.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jInternalFrame7.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
-        jPanelNI.add(jInternalFrame7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 430, 390));
+        jButton29.setText("CONCLUIR");
+        jInternalFrame7.getContentPane().add(jButton29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+
+        jButton32.setText("CANCELAR");
+        jInternalFrame7.getContentPane().add(jButton32, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
+
+        jPanelNI.add(jInternalFrame7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 434, 390));
 
         parentPanel.add(jPanelNI, "card3");
 
@@ -1517,7 +1537,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        entradadeimpressora.entradaimpressora(Integer.parseInt(jText_cpu_ni4.getText()), jTableimpressorani);
+        entradadeimpressora.entradaimpressora(Integer.parseInt(jText_cpu_ni4.getText()), jTableimpressorani);	
     }//GEN-LAST:event_jButton25ActionPerformed
     
     /**
@@ -1560,6 +1580,16 @@ public class MainFrame extends javax.swing.JFrame {
         EncontrarIpDisponivel entr = new EncontrarIpDisponivel();
 	entr.encontraripdisponivel(jText_ip_ni);
     }//GEN-LAST:event_jLabel38MouseClicked
+
+    /**
+     * 
+     * @MANDAR PATRIMONIOS PARA AS REGIONAIS 
+     */
+    private void jLabel39MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel39MouseClicked
+        if(!jText_cpu_ni5.getText().equals("")){
+	jComboBox_pesquisa1.setEnabled(true); jTextArea1.setEnabled(true); jButton29.setEnabled(true);
+	}else{JOptionPane.showMessageDialog(null, "Selecione um patrimonio!");}
+    }//GEN-LAST:event_jLabel39MouseClicked
     
     public static void main(String args[]) {
 	//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1615,9 +1645,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
+    private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
