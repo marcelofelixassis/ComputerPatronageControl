@@ -18,6 +18,7 @@ import Classes_NI.PreencherTabelaComputadorNI;
 import Classes_NI.PreencherTabelaEstabNI;
 import Classes_NI.PreencherTabelaImpressoraNI;
 import Classes_NI.PreencherTabelaSupNI;
+import Classes_NI.RegistrarUsuario.RegistrarUsuario;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.Date;
@@ -38,6 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
    public DefaultTableModel model = new DefaultTableModel();
    public int idSelecionado;
    public String patrimonioBtnEditar, supcpuBtnEditar, estabBtnEditar, impressoraBtnEditar;
+   public String AuxiliarParaMandarPatrimoniosParaRegionais;
    
    PesquisarSetor pesquisa = new PesquisarSetor();
    CriarGrafico criargrafico = new CriarGrafico();
@@ -51,6 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
    EntradaDeEstabilizador entradadeestabilizador = new EntradaDeEstabilizador();
    EntradaDeImpressora entradadeimpressora = new EntradaDeImpressora();
    ExcluirNi excluirni = new ExcluirNi();
+   EnviarParaRegional enviarpararegional = new EnviarParaRegional();
     
    
    
@@ -62,7 +65,7 @@ public class MainFrame extends javax.swing.JFrame {
    
     public MainFrame() {
 	initComponents();
-	jText_ip.setEnabled(false);jComboBox_pesquisa1.setEnabled(false); jTextArea1.setEnabled(false); jButton29.setEnabled(false);
+	jText_ip.setEnabled(false);jComboBox_pesquisa1.setEnabled(false); jTextArea1.setEnabled(false); jButton29.setEnabled(false); jButton32.setEnabled(false);
 	jTableComputador.setDefaultEditor(Object.class, null);
 	this.setExtendedState(MAXIMIZED_BOTH);
         getContentPane().setBackground(Color.WHITE);
@@ -218,6 +221,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel43 = new javax.swing.JLabel();
         jButton29 = new javax.swing.JButton();
         jButton32 = new javax.swing.JButton();
+        jPanelDeposito = new javax.swing.JPanel();
+        jPanelRegionais = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 51));
@@ -958,8 +963,10 @@ public class MainFrame extends javax.swing.JFrame {
         jInternalFrame2.getContentPane().add(jText_estab_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 140, -1));
         jInternalFrame2.getContentPane().add(jText_impressora_ni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 140, -1));
 
+        jButton5.setBackground(new java.awt.Color(0, 0, 0));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contract.png"))); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 102, 255));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-editar_doc.png"))); // NOI18N
         jButton5.setText("REGISTRAR USUÁRIO");
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -967,7 +974,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jInternalFrame2.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 200, 40));
+        jInternalFrame2.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 205, 40));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("IP:");
@@ -1005,8 +1012,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel29.setText("IMPRESSORA:");
         jInternalFrame2.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 30));
 
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(0, 102, 255));
         jLabel38.setText(" Encontrar ip disponivel");
         jLabel38.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel38.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1014,7 +1021,7 @@ public class MainFrame extends javax.swing.JFrame {
                 jLabel38MouseClicked(evt);
             }
         });
-        jInternalFrame2.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 140, -1));
+        jInternalFrame2.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 130, -1));
 
         jPanelNI.add(jInternalFrame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 264, 390));
 
@@ -1210,14 +1217,29 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-folder.png"))); // NOI18N
         jLabel40.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel40.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel40MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-folder.png"))); // NOI18N
         jLabel41.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel41.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel41MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-folder.png"))); // NOI18N
         jLabel42.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel42.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel42MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jComboBox_pesquisa1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE UMA REGIONAL", "ALMENARA", "ARAÇUAÍ", "BARBACENA", "CARATINGA", "CORONEL FABRICIANO", "CURVELO", "DIAMANTINA", "DIVINÓPOLIS", "GOVERNADOR VALADARES", "ITABIRA", "JANAÚBA", "JUIZ DE FORA", "LAVRAS", "LEOPOLDINA", "MONTES CLAROS", "MURIAÉ", "PARACATU", "PASSOS", "PATOS DE MINAS", "POÇOS DE CALDAS", "POUSO ALEGRE", "SAO JOAO DEL REI", "SETE LAGOAS", "TEÓFILO OTONI", "UBÁ", "UBERABA", "UBERLÂNDIA", "VARGINHA", "VIÇOSA" }));
@@ -1232,15 +1254,39 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel43.setText("Observações:");
         jInternalFrame7.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
+        jButton29.setBackground(new java.awt.Color(0, 0, 0));
+        jButton29.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton29.setForeground(new java.awt.Color(0, 102, 255));
         jButton29.setText("CONCLUIR");
+        jButton29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jButton29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
+        jButton32.setBackground(new java.awt.Color(0, 0, 0));
+        jButton32.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton32.setForeground(new java.awt.Color(0, 102, 255));
         jButton32.setText("CANCELAR");
+        jButton32.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jButton32, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
 
         jPanelNI.add(jInternalFrame7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 434, 390));
 
         parentPanel.add(jPanelNI, "card3");
+
+        jPanelDeposito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        parentPanel.add(jPanelDeposito, "card4");
+
+        jPanelRegionais.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        parentPanel.add(jPanelRegionais, "card5");
 
         getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
 
@@ -1487,6 +1533,8 @@ public class MainFrame extends javax.swing.JFrame {
 	    jText_marca_ni.setText(model.getValueAt(index, 1).toString());
 	    jText_sisope_ni.setText(model.getValueAt(index, 2).toString());
 	    jText_cpu_ni.setText(model.getValueAt(index, 0).toString());
+	    jText_supcpu_ni1.setText("");jText_estab_ni1.setText("");jText_impressora_ni1.setText("");
+	    
         }
     }//GEN-LAST:event_jTablecpuniMouseClicked
 
@@ -1497,6 +1545,7 @@ public class MainFrame extends javax.swing.JFrame {
 	    model = (DefaultTableModel) jTablesupni.getModel();	 
 	    jText_supcpu_ni1.setText(model.getValueAt(index, 0).toString());
 	    jText_supcpu_ni.setText(model.getValueAt(index,0).toString());
+	    jText_estab_ni1.setText("");jText_impressora_ni1.setText("");jText_cpu_ni5.setText("");
         }
     }//GEN-LAST:event_jTablesupniMouseClicked
 
@@ -1507,6 +1556,7 @@ public class MainFrame extends javax.swing.JFrame {
 	    model = (DefaultTableModel) jTableestabni.getModel();	 
 	    jText_estab_ni1.setText(model.getValueAt(index, 0).toString());
 	    jText_estab_ni.setText(model.getValueAt(index, 0).toString());
+	    jText_cpu_ni5.setText("");jText_supcpu_ni1.setText("");jText_impressora_ni1.setText("");
         }
     }//GEN-LAST:event_jTableestabniMouseClicked
 
@@ -1517,6 +1567,7 @@ public class MainFrame extends javax.swing.JFrame {
 	    model = (DefaultTableModel) jTableimpressorani.getModel();	 
 	    jText_impressora_ni1.setText(model.getValueAt(index, 0).toString());
 	    jText_impressora_ni.setText(model.getValueAt(index, 0).toString());	
+	    jText_cpu_ni5.setText("");jText_supcpu_ni1.setText("");jText_estab_ni1.setText("");
         }
     }//GEN-LAST:event_jTableimpressoraniMouseClicked
     
@@ -1545,7 +1596,8 @@ public class MainFrame extends javax.swing.JFrame {
      * @REGISTRAR NOVO USUÁRIO 
      */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        RegistrarUsuario registrar = new RegistrarUsuario();
+	registrar.registrar(Integer.parseInt(jText_cpu_ni.getText()), jText_ip_ni.getText(), jText_setor_ni.getText(), jText_usuario_ni.getText(), jText_marca_ni.getText(), jText_sisope_ni.getText(), jText_supcpu_ni.getText(), jText_estab_ni.getText(), jText_impressora_ni.getText());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -1583,13 +1635,69 @@ public class MainFrame extends javax.swing.JFrame {
 
     /**
      * 
-     * @MANDAR PATRIMONIOS PARA AS REGIONAIS 
+     * @MANDAR PATRIMONIOS PARA AS REGIONAIS ---- HABILITAR CAMPOS DE TEXT E BUTTONS
      */
     private void jLabel39MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel39MouseClicked
         if(!jText_cpu_ni5.getText().equals("")){
-	jComboBox_pesquisa1.setEnabled(true); jTextArea1.setEnabled(true); jButton29.setEnabled(true);
+	    AuxiliarParaMandarPatrimoniosParaRegionais = "CPU";
+	    jComboBox_pesquisa1.setEnabled(true); jTextArea1.setEnabled(true); jButton29.setEnabled(true); jButton32.setEnabled(true);
 	}else{JOptionPane.showMessageDialog(null, "Selecione um patrimonio!");}
     }//GEN-LAST:event_jLabel39MouseClicked
+
+    /**
+     * 
+     * @MANDAR PATRIMONIOS PARA REGIONAIS -- BUTTON CANCELAR 
+     */
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+        jComboBox_pesquisa1.setEnabled(false); jTextArea1.setEnabled(false); jButton29.setEnabled(false); jButton32.setEnabled(false);
+	jText_cpu_ni5.setText(""); jText_supcpu_ni1.setText(""); jText_estab_ni1.setText(""); jText_impressora_ni1.setText("");
+    }//GEN-LAST:event_jButton32ActionPerformed
+
+    /**
+     * 
+     * @MANDAR PATRIMONIOS PARA REGIONAIS -- BUTTON CONCLUIR 
+     */
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        if(AuxiliarParaMandarPatrimoniosParaRegionais.equals("CPU")){
+	    enviarpararegional.enviarpararegionalCPU(Integer.parseInt(jText_cpu_ni5.getText()), jTablecpuni, jComboBox_pesquisa1, jTextArea1, jButton29, jButton32);
+	    jText_cpu_ni5.setText("");
+	}else if(AuxiliarParaMandarPatrimoniosParaRegionais.equals("SUPORTE")){
+	    enviarpararegional.enviarpararegionalSUPORTE(Integer.parseInt(jText_supcpu_ni1.getText()), jTablesupni, jComboBox_pesquisa1, jTextArea1, jButton29, jButton32);
+	    jText_supcpu_ni1.setText("");
+	}else if(AuxiliarParaMandarPatrimoniosParaRegionais.equals("ESTABILIZADOR")){
+	    enviarpararegional.enviarpararegionalESTABILIZADOR(Integer.parseInt(jText_estab_ni1.getText()), jTableestabni, jComboBox_pesquisa1, jTextArea1, jButton29, jButton32);
+	    jText_estab_ni1.setText("");
+	}else if(AuxiliarParaMandarPatrimoniosParaRegionais.equals("IMPRESSORA")){
+	    enviarpararegional.enviarpararegionalIMPRESSORA(Integer.parseInt(jText_impressora_ni1.getText()), jTableimpressorani, jComboBox_pesquisa1, jTextArea1, jButton29, jButton32);
+	    jText_impressora_ni1.setText("");
+	}
+    }//GEN-LAST:event_jButton29ActionPerformed
+
+    /**
+     * 
+     * @MANDAR PATRIMONIOS PARA AS REGIONAIS ---- HABILITAR CAMPOS DE TEXT E BUTTONS
+     */
+    private void jLabel40MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel40MouseClicked
+        if(!jText_supcpu_ni1.getText().equals("")){
+	    AuxiliarParaMandarPatrimoniosParaRegionais = "SUPORTE";
+	    jComboBox_pesquisa1.setEnabled(true); jTextArea1.setEnabled(true); jButton29.setEnabled(true); jButton32.setEnabled(true);
+	}else{JOptionPane.showMessageDialog(null, "Selecione um patrimonio!");}
+    }//GEN-LAST:event_jLabel40MouseClicked
+
+    private void jLabel41MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel41MouseClicked
+        if(!jText_estab_ni1.getText().equals("")){
+	    AuxiliarParaMandarPatrimoniosParaRegionais = "ESTABILIZADOR";
+	    jComboBox_pesquisa1.setEnabled(true); jTextArea1.setEnabled(true); jButton29.setEnabled(true); jButton32.setEnabled(true);
+	}else{JOptionPane.showMessageDialog(null, "Selecione um patrimonio!");}
+    }//GEN-LAST:event_jLabel41MouseClicked
+
+    private void jLabel42MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel42MouseClicked
+         if(!jText_impressora_ni1.getText().equals("")){
+	    AuxiliarParaMandarPatrimoniosParaRegionais = "IMPRESSORA";
+	    jComboBox_pesquisa1.setEnabled(true); jTextArea1.setEnabled(true); jButton29.setEnabled(true); jButton32.setEnabled(true);
+	}else{JOptionPane.showMessageDialog(null, "Selecione um patrimonio!");}
+    }//GEN-LAST:event_jLabel42MouseClicked
+    
     
     public static void main(String args[]) {
 	//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1712,7 +1820,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelDeposito;
     private javax.swing.JPanel jPanelNI;
+    private javax.swing.JPanel jPanelRegionais;
     private javax.swing.JPanel jPanelTabela;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
