@@ -19,6 +19,7 @@ import Classes_NI.PreencherTabelaEstabNI;
 import Classes_NI.PreencherTabelaImpressoraNI;
 import Classes_NI.PreencherTabelaSupNI;
 import Classes_NI.RegistrarUsuario.RegistrarUsuario;
+import Classes_NI.RegistrarUsuario.VerificaIP;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.Date;
@@ -54,6 +55,8 @@ public class MainFrame extends javax.swing.JFrame {
    EntradaDeImpressora entradadeimpressora = new EntradaDeImpressora();
    ExcluirNi excluirni = new ExcluirNi();
    EnviarParaRegional enviarpararegional = new EnviarParaRegional();
+   RegistrarUsuario registrar = new RegistrarUsuario();
+   
     
    
    
@@ -222,7 +225,11 @@ public class MainFrame extends javax.swing.JFrame {
         jButton29 = new javax.swing.JButton();
         jButton32 = new javax.swing.JButton();
         jPanelDeposito = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanelRegionais = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 51));
@@ -745,25 +752,29 @@ public class MainFrame extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().add(jText_estab, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 140, -1));
         jInternalFrame1.getContentPane().add(jText_impressora, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 140, -1));
 
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/contract.png"))); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 102, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-editar_doc.png"))); // NOI18N
         jButton3.setText("EDITAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jInternalFrame1.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 100, 40));
+        jInternalFrame1.getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 110, 40));
 
+        jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/recycle-bin.png"))); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 102, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-basura.png"))); // NOI18N
         jButton4.setText("EXCLUIR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jInternalFrame1.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 100, 40));
+        jInternalFrame1.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("IMPRESSORA:");
@@ -1282,10 +1293,44 @@ public class MainFrame extends javax.swing.JFrame {
 
         parentPanel.add(jPanelNI, "card3");
 
+        jPanelDeposito.setBackground(new java.awt.Color(255, 255, 255));
         jPanelDeposito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable1);
+
+        jPanelDeposito.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 660));
+
         parentPanel.add(jPanelDeposito, "card4");
 
+        jPanelRegionais.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRegionais.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(jTable2);
+
+        jPanelRegionais.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 660));
+
         parentPanel.add(jPanelRegionais, "card5");
 
         getContentPane().add(parentPanel, java.awt.BorderLayout.CENTER);
@@ -1433,11 +1478,17 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // CODIGO IR PARA SALA 304
+        parentPanel.removeAll();
+	parentPanel.add(jPanelDeposito);
+	parentPanel.repaint();
+	parentPanel.revalidate();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        // CODIGO REGIONAIS
+        parentPanel.removeAll();
+	parentPanel.add(jPanelRegionais);
+	parentPanel.repaint();
+	parentPanel.revalidate();
     }//GEN-LAST:event_jButton22ActionPerformed
     
     /**
@@ -1596,8 +1647,12 @@ public class MainFrame extends javax.swing.JFrame {
      * @REGISTRAR NOVO USUÁRIO 
      */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        RegistrarUsuario registrar = new RegistrarUsuario();
-	registrar.registrar(Integer.parseInt(jText_cpu_ni.getText()), jText_ip_ni.getText(), jText_setor_ni.getText(), jText_usuario_ni.getText(), jText_marca_ni.getText(), jText_sisope_ni.getText(), jText_supcpu_ni.getText(), jText_estab_ni.getText(), jText_impressora_ni.getText());
+        registrar.registrar(jText_cpu_ni.getText(), jText_ip_ni.getText(), 
+		jText_setor_ni.getText(), jText_usuario_ni.getText(), 
+		jText_marca_ni.getText(), jText_sisope_ni.getText(), 
+		jText_supcpu_ni.getText(), jText_estab_ni.getText(), 
+		jText_impressora_ni.getText(),jText_cpu_ni, jText_ip_ni, jText_setor_ni, jText_usuario_ni,
+		jText_marca_ni, jText_sisope_ni,jText_supcpu_ni, jText_estab_ni, jText_impressora_ni);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -1830,6 +1885,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableComputador;
     private javax.swing.JTable jTablecpuni;
     private javax.swing.JTable jTableestabni;
