@@ -1,6 +1,8 @@
 package Forms;
 
 import Animacion.Animacion;
+import ClassesDeposito.CarregarListDeposito;
+import ClassesRegional.CarregarListRegional;
 import Classes_Home.CriarGrafico;
 import Classes_Home.Editar;
 import Classes_Home.Excluir;
@@ -30,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import scpmso.patrimonio.informática.ConnectionMySQL;
+import scpmso.patrimonio.informática.Deposito;
 
 /**
  *
@@ -56,6 +59,8 @@ public class MainFrame extends javax.swing.JFrame {
    ExcluirNi excluirni = new ExcluirNi();
    EnviarParaRegional enviarpararegional = new EnviarParaRegional();
    RegistrarUsuario registrar = new RegistrarUsuario();
+   CarregarListDeposito deposito = new CarregarListDeposito();
+    CarregarListRegional regional = new CarregarListRegional();
    
     
    
@@ -226,10 +231,10 @@ public class MainFrame extends javax.swing.JFrame {
         jButton32 = new javax.swing.JButton();
         jPanelDeposito = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableDeposito = new javax.swing.JTable();
         jPanelRegionais = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableRegional = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 51));
@@ -1296,18 +1301,32 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelDeposito.setBackground(new java.awt.Color(255, 255, 255));
         jPanelDeposito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDeposito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "PATRIMONIO", "TIPO", "DATA"
             }
-        ));
-        jScrollPane7.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(jTableDeposito);
+        if (jTableDeposito.getColumnModel().getColumnCount() > 0) {
+            jTableDeposito.getColumnModel().getColumn(0).setResizable(false);
+            jTableDeposito.getColumnModel().getColumn(1).setResizable(false);
+            jTableDeposito.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jPanelDeposito.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 660));
 
@@ -1316,18 +1335,33 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelRegionais.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRegionais.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRegional.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "PATRIMONIO", "TIPO", "REGIONAL", "DATA", "OBSERVACAO"
             }
-        ));
-        jScrollPane8.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(jTableRegional);
+        if (jTableRegional.getColumnModel().getColumnCount() > 0) {
+            jTableRegional.getColumnModel().getColumn(0).setResizable(false);
+            jTableRegional.getColumnModel().getColumn(1).setResizable(false);
+            jTableRegional.getColumnModel().getColumn(2).setResizable(false);
+            jTableRegional.getColumnModel().getColumn(3).setResizable(false);
+            jTableRegional.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jPanelRegionais.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 660));
 
@@ -1482,6 +1516,7 @@ public class MainFrame extends javax.swing.JFrame {
 	parentPanel.add(jPanelDeposito);
 	parentPanel.repaint();
 	parentPanel.revalidate();
+	deposito.CarregarListDeposito(jTableDeposito);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -1489,6 +1524,8 @@ public class MainFrame extends javax.swing.JFrame {
 	parentPanel.add(jPanelRegionais);
 	parentPanel.repaint();
 	parentPanel.revalidate();
+	regional.CarregarListRegional(jTableRegional);
+	
     }//GEN-LAST:event_jButton22ActionPerformed
     
     /**
@@ -1887,9 +1924,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableComputador;
+    private javax.swing.JTable jTableDeposito;
+    private javax.swing.JTable jTableRegional;
     private javax.swing.JTable jTablecpuni;
     private javax.swing.JTable jTableestabni;
     private javax.swing.JTable jTableimpressorani;
