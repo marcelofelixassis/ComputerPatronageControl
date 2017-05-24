@@ -16,23 +16,20 @@ import Classes_NI.EntradaDeImpressora;
 import Classes_NI.EntradaDeSuporte;
 import Classes_NI.EnviarParaRegional;
 import Classes_NI.ExcluirNi;
+import Classes_NI.MoverPara340;
 import Classes_NI.PreencherTabelaComputadorNI;
 import Classes_NI.PreencherTabelaEstabNI;
 import Classes_NI.PreencherTabelaImpressoraNI;
 import Classes_NI.PreencherTabelaSupNI;
 import Classes_NI.RegistrarUsuario.RegistrarUsuario;
-import Classes_NI.RegistrarUsuario.VerificaIP;
 import java.awt.Color;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import scpmso.patrimonio.informática.ConnectionMySQL;
-import scpmso.patrimonio.informática.Deposito;
 
 /**
  *
@@ -60,12 +57,10 @@ public class MainFrame extends javax.swing.JFrame {
    EnviarParaRegional enviarpararegional = new EnviarParaRegional();
    RegistrarUsuario registrar = new RegistrarUsuario();
    CarregarListDeposito deposito = new CarregarListDeposito();
-    CarregarListRegional regional = new CarregarListRegional();
+   CarregarListRegional regional = new CarregarListRegional();
+    MoverPara340 moverpara340 = new MoverPara340();
    
     
-   
-   
-   
    ConnectionMySQL mysql = new ConnectionMySQL();
    Connection connection = mysql.Conectar();
    Statement st;
@@ -1161,10 +1156,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-compra.png"))); // NOI18N
         jLabel31.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel31.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel31MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-compra.png"))); // NOI18N
         jLabel33.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel33.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel33MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-basura.png"))); // NOI18N
@@ -1187,10 +1192,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-compra.png"))); // NOI18N
         jLabel35.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel35MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
 
         jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-compra.png"))); // NOI18N
         jLabel37.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel37.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel37MouseClicked(evt);
+            }
+        });
         jInternalFrame7.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-basura.png"))); // NOI18N
@@ -1525,7 +1540,6 @@ public class MainFrame extends javax.swing.JFrame {
 	parentPanel.repaint();
 	parentPanel.revalidate();
 	regional.CarregarListRegional(jTableRegional);
-	
     }//GEN-LAST:event_jButton22ActionPerformed
     
     /**
@@ -1789,6 +1803,26 @@ public class MainFrame extends javax.swing.JFrame {
 	    jComboBox_pesquisa1.setEnabled(true); jTextArea1.setEnabled(true); jButton29.setEnabled(true); jButton32.setEnabled(true);
 	}else{JOptionPane.showMessageDialog(null, "Selecione um patrimonio!");}
     }//GEN-LAST:event_jLabel42MouseClicked
+
+    /*
+    *
+    * @ENVIAR PARA O DEPOSITO
+    */
+    private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
+	moverpara340.moverpara340cpu(jText_cpu_ni5, jTablecpuni);
+    }//GEN-LAST:event_jLabel31MouseClicked
+
+    private void jLabel33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MouseClicked
+        moverpara340.moverpara340supcpu(jText_supcpu_ni1, jTablesupni);
+    }//GEN-LAST:event_jLabel33MouseClicked
+
+    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
+        moverpara340.moverpara340esatb(jText_estab_ni1, jTableestabni);
+    }//GEN-LAST:event_jLabel35MouseClicked
+
+    private void jLabel37MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseClicked
+        moverpara340.moverpara340impressora(jText_impressora_ni1, jTableimpressorani);
+    }//GEN-LAST:event_jLabel37MouseClicked
     
     
     public static void main(String args[]) {

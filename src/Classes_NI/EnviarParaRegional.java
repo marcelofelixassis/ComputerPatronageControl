@@ -66,7 +66,7 @@ public class EnviarParaRegional {
 		     + "VALUES (?,?,?,?,?)";
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1,patrimonio);	  
-		preparedStatement.setString(2, "SUPPORTE");
+		preparedStatement.setString(2, "SUPORTE");
 		preparedStatement.setString(3, jcombobox.getSelectedItem().toString());
 		preparedStatement.setString(4, Calendar.getInstance().getTime().toString());
 		preparedStatement.setString(5, jTextArea.getText());	   
