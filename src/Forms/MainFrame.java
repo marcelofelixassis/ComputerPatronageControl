@@ -2,7 +2,9 @@ package Forms;
 
 import Animacion.Animacion;
 import ClassesDeposito.CarregarListDeposito;
+import ClassesDeposito.ExcluirDeposito;
 import ClassesRegional.CarregarListRegional;
+import ClassesRegional.ExcluirRegional;
 import Classes_Home.CriarGrafico;
 import Classes_Home.Editar;
 import Classes_Home.Excluir;
@@ -58,9 +60,11 @@ public class MainFrame extends javax.swing.JFrame {
    RegistrarUsuario registrar = new RegistrarUsuario();
    CarregarListDeposito deposito = new CarregarListDeposito();
    CarregarListRegional regional = new CarregarListRegional();
-    MoverPara340 moverpara340 = new MoverPara340();
+   MoverPara340 moverpara340 = new MoverPara340();
+   ExcluirDeposito excluir = new ExcluirDeposito();
+    ExcluirRegional excluirreg = new ExcluirRegional();
+      
    
-    
    ConnectionMySQL mysql = new ConnectionMySQL();
    Connection connection = mysql.Conectar();
    Statement st;
@@ -1336,6 +1340,11 @@ public class MainFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableDeposito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableDepositoMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(jTableDeposito);
         if (jTableDeposito.getColumnModel().getColumnCount() > 0) {
             jTableDeposito.getColumnModel().getColumn(0).setResizable(false);
@@ -1343,7 +1352,7 @@ public class MainFrame extends javax.swing.JFrame {
             jTableDeposito.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jPanelDeposito.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 660));
+        jPanelDeposito.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 870));
 
         parentPanel.add(jPanelDeposito, "card4");
 
@@ -1369,6 +1378,11 @@ public class MainFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableRegional.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableRegionalMouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(jTableRegional);
         if (jTableRegional.getColumnModel().getColumnCount() > 0) {
             jTableRegional.getColumnModel().getColumn(0).setResizable(false);
@@ -1378,7 +1392,7 @@ public class MainFrame extends javax.swing.JFrame {
             jTableRegional.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanelRegionais.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 660));
+        jPanelRegionais.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1260, 870));
 
         parentPanel.add(jPanelRegionais, "card5");
 
@@ -1699,11 +1713,11 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         registrar.registrar(jText_cpu_ni.getText(), jText_ip_ni.getText(), 
-		jText_setor_ni.getText(), jText_usuario_ni.getText(), 
-		jText_marca_ni.getText(), jText_sisope_ni.getText(), 
-		jText_supcpu_ni.getText(), jText_estab_ni.getText(), 
-		jText_impressora_ni.getText(),jText_cpu_ni, jText_ip_ni, jText_setor_ni, jText_usuario_ni,
-		jText_marca_ni, jText_sisope_ni,jText_supcpu_ni, jText_estab_ni, jText_impressora_ni);
+	jText_setor_ni.getText(), jText_usuario_ni.getText(), 
+	jText_marca_ni.getText(), jText_sisope_ni.getText(), 
+	jText_supcpu_ni.getText(), jText_estab_ni.getText(), 
+	jText_impressora_ni.getText(),jText_cpu_ni, jText_ip_ni, jText_setor_ni, jText_usuario_ni,
+	jText_marca_ni, jText_sisope_ni,jText_supcpu_ni, jText_estab_ni, jText_impressora_ni);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -1823,6 +1837,48 @@ public class MainFrame extends javax.swing.JFrame {
     private void jLabel37MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseClicked
         moverpara340.moverpara340impressora(jText_impressora_ni1, jTableimpressorani);
     }//GEN-LAST:event_jLabel37MouseClicked
+
+    /*
+    *
+    * @EVENTO DE DUPLO CLICK NA TABELA DA 340
+    */
+    private void jTableDepositoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDepositoMouseClicked
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            evt.consume();
+            int index = jTableDeposito.getSelectedRow();
+	    model = (DefaultTableModel) jTableDeposito.getModel();
+	    Object opcoes[] = {"Sim", "Não"};
+	    int selection = JOptionPane.showOptionDialog(
+		null, model.getValueAt(index,0)+" / "+model.getValueAt(index,1)
+		    +" / "+model.getValueAt(index,2)+"\nDeseja excluir estes dados ?", "",
+		0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]
+	    );
+	    switch(selection){
+		case 0:
+		    excluir.excluindo((Integer) model.getValueAt(index,0), jTableDeposito);
+		break;    
+	    }  
+	}
+    }//GEN-LAST:event_jTableDepositoMouseClicked
+
+    private void jTableRegionalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRegionalMouseClicked
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            evt.consume();
+            int index = jTableRegional.getSelectedRow();
+	    model = (DefaultTableModel) jTableRegional.getModel();
+	    Object opcoes[] = {"Sim", "Não"};
+	    int selection = JOptionPane.showOptionDialog(
+		null, model.getValueAt(index,0)+" / "+model.getValueAt(index,1)
+		    +" / "+model.getValueAt(index,2)+" / "+model.getValueAt(index,3)+"\nDeseja excluir estes dados ?", "",
+		0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]
+	    );
+	    switch(selection){
+		case 0:
+		    excluirreg.excluindo((Integer) model.getValueAt(index,0), jTableRegional);
+		break;    
+	    }  
+	}
+    }//GEN-LAST:event_jTableRegionalMouseClicked
     
     
     public static void main(String args[]) {
