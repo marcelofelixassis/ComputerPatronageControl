@@ -7,6 +7,7 @@ import ClassesRegional.CarregarListRegional;
 import ClassesRegional.ExcluirRegional;
 import Classes_Home.CriarGrafico;
 import Classes_Home.Editar;
+import Classes_Home.EnviarPara340;
 import Classes_Home.Excluir;
 import Classes_Home.PesquisarSetor;
 import Classes_Home.PesquisasAvancada;
@@ -62,7 +63,8 @@ public class MainFrame extends javax.swing.JFrame {
    CarregarListRegional regional = new CarregarListRegional();
    MoverPara340 moverpara340 = new MoverPara340();
    ExcluirDeposito excluir = new ExcluirDeposito();
-    ExcluirRegional excluirreg = new ExcluirRegional();
+   ExcluirRegional excluirreg = new ExcluirRegional();
+   EnviarPara340 enviarpara340 = new EnviarPara340();
       
    
    ConnectionMySQL mysql = new ConnectionMySQL();
@@ -1562,11 +1564,12 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Editar editar = new Editar();
+	String marca = jText_marca.getText();
+	String sisope = jText_sisope.getText();
 	editar.Edit(jText_patrimonio.getText(), jText_ip.getText(), jText_setor.getText(), 
 	    jText_usuario.getText(), jText_marca.getText(), jText_sisope.getText(), 
 	    jText_supcpu.getText(), jText_estab.getText(), jText_impressora.getText(), 
 	    idSelecionado, patrimonioBtnEditar, supcpuBtnEditar, estabBtnEditar, impressoraBtnEditar);  
-	
 	preenchertabelahome.preenchertabelahome(jTableComputador);
 
 	if(!patrimonioBtnEditar.equals(jText_patrimonio.getText())){
@@ -1574,6 +1577,14 @@ public class MainFrame extends javax.swing.JFrame {
 	    int selection = JOptionPane.showOptionDialog(
 	    null, "O que deseja fazer com o CPU "+patrimonioBtnEditar+" ?", "",
 	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	    switch(selection){
+		case 0:
+		    enviarpara340.enviarcpu(Integer.parseInt(patrimonioBtnEditar), marca, sisope, 1);
+		break;
+		case 1:
+		    enviarpara340.enviarcpu(Integer.parseInt(patrimonioBtnEditar), marca, sisope, 2);
+		break;
+	    }
 	    patrimonioBtnEditar = jText_patrimonio.getText();
         }
 	if(!supcpuBtnEditar.equals(jText_supcpu.getText())){
@@ -1581,6 +1592,14 @@ public class MainFrame extends javax.swing.JFrame {
 	    int selection = JOptionPane.showOptionDialog(
 	    null, "O que deseja fazer com o SUPORTE CPU "+supcpuBtnEditar+" ?", "",
 	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	     switch(selection){
+		case 0:
+		    enviarpara340.enviarsup(Integer.parseInt(supcpuBtnEditar), 1);
+		break;
+		case 1:
+		    enviarpara340.enviarsup(Integer.parseInt(supcpuBtnEditar), 2);
+		break;
+	    }
 	    supcpuBtnEditar = jText_supcpu.getText();
 	}
 	if(!estabBtnEditar.equals(jText_estab.getText())){
@@ -1588,6 +1607,14 @@ public class MainFrame extends javax.swing.JFrame {
 	    int selection = JOptionPane.showOptionDialog(
 	    null, "O que deseja fazer com o ESTABILIZADOR "+estabBtnEditar+" ?", "",
 	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	     switch(selection){
+		case 0:
+		    enviarpara340.enviarestab(Integer.parseInt(estabBtnEditar), 1);
+		break;
+		case 1:
+		    enviarpara340.enviarestab(Integer.parseInt(estabBtnEditar), 2);
+		break;
+	    }
 	    estabBtnEditar = jText_estab.getText();
         }
 	if(!impressoraBtnEditar.equals(jText_impressora.getText())){
@@ -1595,6 +1622,14 @@ public class MainFrame extends javax.swing.JFrame {
 	    int selection = JOptionPane.showOptionDialog(
 	    null, "O que deseja fazer com a IMPRESSORA "+impressoraBtnEditar+" ?", "",
 	    0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+	     switch(selection){
+		case 0:
+		    enviarpara340.enviarimpressora(Integer.parseInt(impressoraBtnEditar), 1);
+		break;
+		case 1:
+		    enviarpara340.enviarimpressora(Integer.parseInt(impressoraBtnEditar), 2);
+		break;
+	    }
 	    impressoraBtnEditar = jText_impressora.getText();
 	}
     }//GEN-LAST:event_jButton3ActionPerformed

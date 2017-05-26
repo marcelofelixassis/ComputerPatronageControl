@@ -16,7 +16,7 @@ import scpmso.patrimonio.informática.ConnectionMySQL;
  * @author Marcelo Félix - marcelofelix.af@gmail.com
  */
 public class Editar {
-   ConnectionMySQL mysql = new ConnectionMySQL();
+  ConnectionMySQL mysql = new ConnectionMySQL();
    Connection connection = mysql.Conectar();
    Statement st;
    ResultSet rs;
