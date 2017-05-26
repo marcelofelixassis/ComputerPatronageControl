@@ -549,7 +549,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton28.setForeground(new java.awt.Color(255, 255, 255));
         jButton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-buscar.png"))); // NOI18N
-        jButton28.setText("aline");
+        jButton28.setText("DCSTA");
         jButton28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton28.setIconTextGap(8);
         jButton28.setMargin(new java.awt.Insets(2, 0, 2, 8));
@@ -563,7 +563,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton30.setForeground(new java.awt.Color(255, 255, 255));
         jButton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-buscar.png"))); // NOI18N
-        jButton30.setText("giani");
+        jButton30.setText("CORE");
         jButton30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton30.setIconTextGap(8);
         jButton30.setMargin(new java.awt.Insets(2, 0, 2, 8));
@@ -577,7 +577,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton31.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton31.setForeground(new java.awt.Color(255, 255, 255));
         jButton31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/x26-buscar.png"))); // NOI18N
-        jButton31.setText("consult");
+        jButton31.setText("CONS");
         jButton31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton31.setIconTextGap(8);
         jButton31.setMargin(new java.awt.Insets(2, 0, 2, 8));
@@ -1511,23 +1511,23 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
+        pesquisa.pesquisarsetor(jTableComputador, "'ATP'", jPanel2, jScrollPane2, SetaMenuDeSetores);
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        // TODO add your handling code here:
+        pesquisa.pesquisarsetor(jTableComputador, "'CI'", jPanel2, jScrollPane2, SetaMenuDeSetores);
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        // TODO add your handling code here:
+        pesquisa.pesquisarsetor(jTableComputador, "'DCSTA'", jPanel2, jScrollPane2, SetaMenuDeSetores);
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
-        // TODO add your handling code here:
+        pesquisa.pesquisarsetor(jTableComputador, "'CORE'", jPanel2, jScrollPane2, SetaMenuDeSetores);
     }//GEN-LAST:event_jButton30ActionPerformed
 
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
-        // TODO add your handling code here:
+        pesquisa.pesquisarsetor(jTableComputador, "'CONSULTORIO'", jPanel2, jScrollPane2, SetaMenuDeSetores);
     }//GEN-LAST:event_jButton31ActionPerformed
     
     /**

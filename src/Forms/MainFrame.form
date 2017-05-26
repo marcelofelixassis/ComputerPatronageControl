@@ -730,7 +730,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/imagens/x26-buscar.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="aline"/>
+                    <Property name="text" type="java.lang.String" value="DCSTA"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="iconTextGap" type="int" value="8"/>
                     <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -755,7 +755,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/imagens/x26-buscar.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="giani"/>
+                    <Property name="text" type="java.lang.String" value="CORE"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="iconTextGap" type="int" value="8"/>
                     <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -780,7 +780,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/imagens/x26-buscar.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="consult"/>
+                    <Property name="text" type="java.lang.String" value="CONS"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="iconTextGap" type="int" value="8"/>
                     <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
